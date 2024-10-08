@@ -13,10 +13,11 @@ router.post('/',upload.single("image"),async (req, res) => {
             contact
         } = req.body;
 
-        const files = req.files;
-        const fileBuffers = files.map(file => file.buffer);
-        const imageUrls = await uploadFiles(fileBuffers);
+        if(!name || !contact || !req.file){
+            return res.status(404).json({ status: 404, message: "Name , contact ang image are required" });
+        }
 
+        const imageUrls = await uploadFiles([req.file.buffer]);
         const createdCard = await Card.create({
             name,
             image : imageUrls[0],
