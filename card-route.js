@@ -14,7 +14,7 @@ router.post('/',upload.single("image"),async (req, res) => {
         } = req.body;
 
         if(!name || !contact || !req.file){
-            return res.status(404).json({ status: 404, message: "Name , contact ang image are required" });
+            return res.status(404).json({ status: 404, message: "Name , contact and image are required" });
         }
 
         const imageUrls = await uploadFiles([req.file.buffer]);
