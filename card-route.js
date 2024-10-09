@@ -26,12 +26,12 @@ router.post('/',upload.single("image"),async (req, res) => {
 
         return res.status(201).json(createdCard);
     } catch (error) {
-        return res.status(500).json({message: "Internal Server Error", error: error.message});
+        return res.status(500).json({message: "Internal Server Error", error: error});
     }
 });
 
 router.get('/',async (req, res) => {
-    const card = await Card.find();
+    const card = await Card.find({});
     return res.json(card);
 });
 
